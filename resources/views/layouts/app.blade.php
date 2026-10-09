@@ -82,7 +82,7 @@
         /* Utility Form Styles */
         .form-group { margin-bottom: 18px; }
         label { display: block; margin-bottom: 6px; color: #0d47a1; font-weight: 600; font-size: 0.9rem; }
-        input[type="text"], input[type="number"] {
+        input[type="text"], input[type="number"], input[type="date"] {
             width: 100%; padding: 12px 14px; border: 1.5px solid #90caf9;
             border-radius: 10px; font-size: 0.95rem; outline: none; background-color: #f7faff;
         }
