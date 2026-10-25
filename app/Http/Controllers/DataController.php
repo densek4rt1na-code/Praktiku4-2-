@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 
 class DataController extends Controller
 {
-  
-    public function form() {
+    public function form()
+    {
         return view('form');
     }
 
-    public function proses(Request $request) {
+    public function proses(Request $request)
+    {
         $nama = $request->input('nama');
         $lokasi = $request->input('lokasi');
         $tinggi = $request->input('tinggi');
@@ -19,4 +20,3 @@ class DataController extends Controller
         return view('hasil', compact('nama', 'lokasi', 'tinggi'));
     }
 }
-

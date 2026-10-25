@@ -17,9 +17,9 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nama_pelapor'     => 'required|string|max:255',
-            'lokasi'           => 'required|string|max:255',
-            'tinggi_genangan'  => 'required|integer|min:0',
+            'nama_pelapor' => 'required|string|max:255',
+            'lokasi' => 'required|string|max:255',
+            'tinggi_genangan' => 'required|integer|min:0',
             'tanggal_kejadian' => 'required|date',
         ]);
 

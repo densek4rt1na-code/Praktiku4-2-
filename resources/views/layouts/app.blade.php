@@ -27,16 +27,32 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         header h1 {
             font-size: 1.4rem;
         }
 
+        header h1 a {
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
         nav a {
             color: #ffffff;
             text-decoration: none;
-            margin-left: 20px;
             font-weight: 600;
             font-size: 0.95rem;
             transition: color 0.2s;
@@ -44,6 +60,24 @@
 
         nav a:hover {
             color: #bbdefb;
+        }
+
+        .nav-logout-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-logout-btn:hover {
+            background: #d32f2f;
+            border-color: #d32f2f;
+            color: #ffffff;
         }
 
         main {
@@ -82,7 +116,7 @@
         /* Utility Form Styles */
         .form-group { margin-bottom: 18px; }
         label { display: block; margin-bottom: 6px; color: #0d47a1; font-weight: 600; font-size: 0.9rem; }
-        input[type="text"], input[type="number"], input[type="date"] {
+        input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="date"] {
             width: 100%; padding: 12px 14px; border: 1.5px solid #90caf9;
             border-radius: 10px; font-size: 0.95rem; outline: none; background-color: #f7faff;
         }
@@ -101,15 +135,44 @@
         .waspada { background-color: #fbc02d; color: #333; } /* Yellow */
         .siaga { background-color: #f57c00; } /* Orange */
         .awas { background-color: #d32f2f; } /* Red */
+
+        /* Alert Notifications */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .alert-danger {
+            background-color: #ffebee;
+            border: 1px solid #ef9a9a;
+            color: #b71c1c;
+        }
+        .alert-success {
+            background-color: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            color: #1b5e20;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>LaporBanjir</h1>
+        <h1><a href="{{ route('laporan.create') }}">LaporBanjir</a></h1>
         <nav>
-            <a href="{{ route('laporan.index') }}">Daftar Laporan</a>
             <a href="{{ route('laporan.create') }}">Buat Laporan</a>
+
+            @auth
+                <a href="{{ route('laporan.index') }}">Daftar Laporan</a>
+                <a href="{{ route('petugas.profile') }}">Profil Petugas</a>
+                <form action="{{ route('logout') }}" method="POST" style="display: inline-block;">
+                    @csrf
+                    <button type="submit" class="nav-logout-btn">Logout</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('register') }}">Register</a>
+            @endauth
         </nav>
     </header>
 

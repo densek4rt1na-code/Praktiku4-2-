@@ -27,9 +27,9 @@ class LaporanSeeder extends Seeder
 
         for ($i = 0; $i < 20; $i++) {
             Laporan::create([
-                'nama_pelapor'     => $faker->name(),
-                'lokasi'           => $faker->randomElement($kecamatan),
-                'tinggi_genangan'  => $tinggiPaksa[$i] ?? $faker->numberBetween(10, 150),
+                'nama_pelapor' => $faker->name(),
+                'lokasi' => $faker->randomElement($kecamatan),
+                'tinggi_genangan' => $tinggiPaksa[$i] ?? $faker->numberBetween(10, 150),
                 'tanggal_kejadian' => $faker->dateTimeBetween('-1 month', 'now')->format('Y-m-d'),
             ]);
         }
