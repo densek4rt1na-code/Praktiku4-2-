@@ -25,14 +25,31 @@
                 <a class="{{ ($activeSection ?? '') === 'cuaca' ? 'active' : '' }}" href="{{ route('resources.index', 'cuaca') }}"><span class="nav-icon">☼</span> Kondisi Cuaca</a>
             </nav>
             <div class="sidebar-bottom">
-                <div class="online"><span></span> Sistem beroperasi</div>
+                @auth
+                    <div class="online"><span></span> Petugas: {{ auth()->user()->name }}</div>
+                @else
+                    <div class="online" style="border-color: #27404f;"><span style="background: #e9bb6a; box-shadow: 0 0 9px #e9bb6a99;"></span> Mode Tamu (Publik)</div>
+                @endauth
                 <div class="sidebar-caption">SMART MARITIM <span>v1.0</span></div>
             </div>
         </aside>
         <main class="main-area">
             <header class="topbar">
                 <div class="breadcrumb"><span>SMART MARITIM</span><b>/</b><strong>{{ strtoupper($title ?? 'RINGKASAN') }}</strong></div>
-                <div class="topbar-right"><span class="top-date">{{ now()->translatedFormat('l, d F Y') }}</span><span class="user-name">Data Terpadu</span><div class="avatar" aria-hidden="true">SM</div></div>
+                <div class="topbar-right">
+                    <span class="top-date">{{ now()->translatedFormat('l, d F Y') }}</span>
+                    @auth
+                        <span class="user-name">{{ auth()->user()->name }}</span>
+                        <div class="avatar" title="{{ auth()->user()->email }}" aria-hidden="true">{{ strtoupper(substr(auth()->user()->name, 0, 2)) }}</div>
+                        <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                            @csrf
+                            <button type="submit" class="logout-button" title="Keluar dari sistem">Keluar</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="logout-button" style="text-decoration: none; padding: 6px 11px;">Masuk</a>
+                        <a href="{{ route('register') }}" class="primary-button" style="padding: 6px 11px; font-size: 9px; text-decoration: none;">Daftar</a>
+                    @endauth
+                </div>
             </header>
             <div class="page-content">@yield('content')</div>
             <footer class="footer">Smart Meritim <span>·</span> Sistem informasi dan pemantauan perikanan</footer>
